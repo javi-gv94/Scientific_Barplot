@@ -1,0 +1,45 @@
+Method,wpc_index,Group
+Kernel_1,0.583,Kernel Method
+Kernel_2,0.559,Kernel Method
+Kernel_3,0.553,Kernel Method
+Kernel_4,0.549,Kernel Method
+Nonlinear_reg_1,0.577,Nonlinear Regression
+Nonlinear_reg_2,0.569,Nonlinear Regression
+Nonlinear_reg_3,0.565,Nonlinear Regression
+Nonlinear_reg_4,0.564,Nonlinear Regression
+Nonlinear_reg_5,0.559,Nonlinear Regression
+Nonlinear_reg_6,0.551,Nonlinear Regression
+Nonlinear_reg_7,0.548,Nonlinear Regression
+Nonlinear_reg_8,0.548,Nonlinear Regression
+Nonlinear_reg_9,0.544,Nonlinear Regression
+Nonlinear_reg_10,0.538,Nonlinear Regression
+Nonlinear_reg_11,0.524,Nonlinear Regression
+Sparse_reg_1,0.564,Sparse Linear Regression
+Sparse_reg_2,0.564,Sparse Linear Regression
+Sparse_reg_3,0.564,Sparse Linear Regression
+Sparse_reg_4,0.551,Sparse Linear Regression
+Sparse_reg_5,0.539,Sparse Linear Regression
+Sparse_reg_6,0.539,Sparse Linear Regression
+Sparse_reg_7,0.532,Sparse Linear Regression
+Sparse_reg_8,0.531,Sparse Linear Regression
+Sparse_reg_9,0.531,Sparse Linear Regression
+Sparse_reg_10,0.531,Sparse Linear Regression
+Sparse_reg_11,0.527,Sparse Linear Regression
+Sparse_reg_12,0.519,Sparse Linear Regression
+Sparse_reg_13,0.517,Sparse Linear Regression
+Sparse_reg_14,0.485,Sparse Linear Regression
+PLS_PC_reg_1,0.562,PC or PLS regression
+PLS_PC_reg_2,0.543,PC or PLS regression
+PLS_PC_reg_3,0.535,PC or PLS regression
+PLS_PC_reg_4,0.524,PC or PLS regression
+Ensemble_1,0.562,Ensemble/Model selection
+Ensemble_2,0.556,Ensemble/Model selection
+Ensemble_3,0.554,Ensemble/Model selection
+Ensemble_4,0.517,Ensemble/Model selection
+Ensemble_5,0.506,Ensemble/Model selection
+Other_1,0.57,Other
+Other_2,0.553,Other
+Other_3,0.553,Other
+Other_4,0.531,Other
+Other_5,0.528,Other
+Other_6,0.521,Other

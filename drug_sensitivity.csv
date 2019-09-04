@@ -1,0 +1,17 @@
+Method,wpc_index,Group
+Kernel_1,0.583,Kernel Method
+Kernel_2,0.559,Kernel Method
+Kernel_3,0.553,Kernel Method
+Nonlinear_reg_1,0.577,Nonlinear Regression
+Nonlinear_reg_2,0.569,Nonlinear Regression
+Nonlinear_reg_3,0.565,Nonlinear Regression
+Nonlinear_reg_4,0.564,Nonlinear Regression
+Sparse_reg_13,0.517,Sparse Linear Regression
+Sparse_reg_14,0.485,Sparse Linear Regression
+PLS_PC_reg_1,0.562,PC or PLS regression
+PLS_PC_reg_2,0.543,PC or PLS regression
+PLS_PC_reg_3,0.535,PC or PLS regression
+Ensemble_1,0.562,Ensemble/Model selection
+Ensemble_2,0.556,Ensemble/Model selection
+Other_1,0.57,Other
+Other_2,0.553,Other
