@@ -6,6 +6,8 @@ body {
     border-collapse: collapse;
     text-align: center;
     font-size: .7vw;
+    width: 75%;
+    white-space:nowrap;
 }
 
 .benchmarkingTable {
@@ -15,6 +17,12 @@ body {
     border: 5px solid black; 
     float: right;
 }
+
+.benchmarkingTable {
+  display: none;
+  height: 70vh;
+  overflow-y: scroll;
+}
 .benchmarkingSVG{
   width: 68vw;
 }
@@ -22,10 +30,6 @@ body {
 .benchmarkingChart{
     width: 90vw;
 }
-
-  .button{
-    position: fixed;
-  }
   .axis path,
   .axis line {
     fill: none;
@@ -73,3 +77,21 @@ body {
     top: 100%;
     left: 0;
   }
+
+  .classificator_button{
+    position: absolute;
+    background-color: #0A58A2; 
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1vw;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+    width: 20vw;
+
+    }
+
+.classificator_button:hover {
+    background-color: #b3cde0;
+
+}
