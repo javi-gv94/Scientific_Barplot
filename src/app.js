@@ -1,16 +1,14 @@
-import * as d3 from 'd3';
 import d3Tip from "d3-tip";
 import './app.css';
-import $ from "jquery";
 import { createApolloFetch } from 'apollo-fetch';
 
 
 
-var metrics_values={};
+const metrics_values={};
 
 function load_bars_visualization (){ 
 
-  let charts = document.getElementsByClassName("benchmarkingChart");
+  let charts = document.getElementsByClassName("benchmarkingChart_bars");
   
   let i = 0;
   let dataId;
@@ -51,7 +49,7 @@ function load_bars_visualization (){
                       }`
 
   let table_id = divid + "_table";
-  var input = $('<br><br><table id="'+table_id+ '"class="benchmarkingTable"></table>');
+  var input = $('<br><br><table id="'+table_id+ '"class="benchmarkingTable_bars"></table>');
   $("#" + divid).append(input);
 
     get_data(url, json_query ,dataId, divid, metric_y);
@@ -154,7 +152,7 @@ function join_all_json(result, divid, tool_names, metric_name){
   // sort data by participant name
   data = sortByKey(data, "toolname");
   metrics_values[divid] = data;
-
+  
   // add plot limits
   var margin = {top: 40, right: 30, bottom: 120, left: 60},
   width = Math.round($(window).width()* 0.70226) - margin.left - margin.right,
@@ -166,7 +164,7 @@ function join_all_json(result, divid, tool_names, metric_name){
   .attr("class","classificator_button")
   .attr("id", divid + "_button")
   .attr("value", "Sort & Classify Results" )
-  .on('click', function(d) { sort_and_classify(data, divid, width, margin, height, metric_name);})
+  .on('click', function(d) { compute_classification( divid, width, margin, height, metric_name);})
   
   build_plot(data, divid, width, margin, height, metric_name);
 };
@@ -280,17 +278,14 @@ function build_plot(data, divid, width, margin, height, metric_name){
 
 function sort_and_classify(data, divid, width, margin, height, metric_name){
 
-  // every time a new classification is compute the previous results table is deleted (if it exists)
-  if (document.getElementById(divid + "_table") != null) {
-    document.getElementById(divid + "_table").innerHTML = '';
-  };
+  //make a shallow copy (not reference) of the data that will be sorted
+  const data_copy = [...data];
    // sort data
-   let sorted_data = data.sort(function(b, a) {
+   let sorted_data = data_copy.sort(function(b, a) {
     return a.metric_value - b.metric_value;
   });
 
-  // delete previous plot and build new one
-  d3.select('#'+ divid + '_svg').remove();
+  //  build new plot with sorted data
   build_plot(sorted_data, divid, width, margin, height, metric_name);
 
   let values = sorted_data.map(a => a.metric_value).sort(function(a, b){return a - b});
@@ -341,15 +336,6 @@ function draw_quartile_line(divid, quantile, data, lower_quantile_limit, text, w
   
   
     var svg = d3.select("#" + divid + "_svg")
-    // svg.append("line")
-    // .attr("x1", x(quantile_limit) + x.step() /2 - x.bandwidth() /2 )
-    // .attr("x2", x(quantile_limit) + x.step() /2 - x.bandwidth() /2 )
-    // .attr("y1", 40)
-    // .attr("y2", 480)
-    // .attr("stroke", "#0A58A2")
-    // .attr("stroke-width",2)
-    // .style("stroke-dasharray", ("20, 5"))
-    // .style("opacity", 0.4)
 
     svg.append("g")
        .attr("transform", "translate("+ (x(quantile_limit) + x.step()/2 - x.bandwidth()  + margin.left)+",0)")
@@ -448,6 +434,36 @@ function set_cell_colors(divid){
 
 };
 
+function compute_classification( divid, width, margin, height, metric_name){
+
+  var table = document.getElementById(divid + "_table");
+  // every time a new classification is compute the previous results table is deleted (if it exists)
+  if (table != null) {
+    table.innerHTML = '';
+  };
+
+  // delete previous plot and build new one
+  d3.select('#'+ divid + '_svg').remove();
+
+  // check if table is visible; if it is, build plot with unsorted data
+  var style = getComputedStyle(table);
+  
+  if ( style.display == "block") {
+
+    //change the text in the classification button
+    d3.select("#" + divid + "_button").attr("value", "Sort & Classify Results");
+    // change table display
+    table.style.display = "none"; 
+    build_plot(metrics_values[divid], divid, width, margin, height, metric_name);
+
+  } else { // if not, sort the data and build plot with it
+
+    //change the text in the classification button
+    d3.select("#" + divid + "_button").attr("value", "Get Back to Raw Results");
+    sort_and_classify(metrics_values[divid], divid, width, margin, height, metric_name);
+  }
+
+};
 // function add_arrow(divid, svg, xScale, yScale, better, data){
 
 //   // append optimization arrow
@@ -469,25 +485,25 @@ function set_cell_colors(divid){
 //   let x_axis = xScale.range();
 //   let y_axis = yScale.domain();
 
-// //   var line = svg.data(data)
-// //   .enter().append("line")
-// //   .attr("class", function (d) { return divid+"___better_annotation";})
-// //   .attr("x1", function (d) {
-// //     return xScale(d.Method) + xScale.rangeBand()/2;
-// // })
-// // .attr("x2", function (d) {
-// //     return xScale(d.Method) + xScale.rangeBand()/2;
-// // })
-// // .attr("y1", function (d) {
-// //     return yScale(d.wpc_index) ;
-// // })
-// // .attr("y2", function (d) {
-// //     return yScale(d.wpc_index) ;
-// // })
-// //   .attr("stroke","black")  
-// //   .attr("stroke-width",2)  
-// //   .attr("marker-end","url(#opt_triangle)")
-// //   .style("opacity", 0.4);  
+  // var line = svg.data(data)
+  // .enter().append("line")
+  // .attr("class", function (d) { return divid+"___better_annotation";})
+  // .attr("x1", function (d) {
+  //   return xScale(d.toolname) + xScale.rangeBand()/2;
+  // })
+  // .attr("x2", function (d) {
+  //     return xScale(d.toolname) + xScale.rangeBand()/2;
+  // })
+  // .attr("y1", function (d) {
+  //     return yScale(d.metric_value) ;
+  // })
+  // .attr("y2", function (d) {
+  //     return yScale(d.metric_value) ;
+  // })
+  //   .attr("stroke","black")  
+  //   .attr("stroke-width",2)  
+  //   .attr("marker-end","url(#opt_triangle)")
+  //   .style("opacity", 0.4);  
 
 //   svg.data(data)
 //   .enter().append("text")

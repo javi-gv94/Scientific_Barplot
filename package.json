@@ -1,7 +1,7 @@
 {
-  "name": "BenchmarkingCharts",
+  "name": "benchmarkingChart_bars",
   "version": "0.0.1",
-  "description": "BenchmarkingCharts",
+  "description": "benchmarkingChart_bars",
   "main": "app.js",
   "devDependencies": {
     "d3": "^5.5.0",
